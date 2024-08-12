@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="image/icon.png">
+    <title>About Me</title>
+  </head>
+  <body>
+    <div class="top-box">
+    </div>
+    <div class="wrapper">
+      <div class="container">
+        <div class="image">
+            <img src="image/img.jpg" alt="Berton Adiwidya">
+        </div>
+        <div class="about-me">
+          <div class="header">
+            <h1>About Me</h1>
+          </div>
+          <div class="paragraf">
+            <p>Halo! Nama saya Berton Adiwidya Wibowo, seorang mahasiswa aktif semester 3 departemen Ilmu Komputer IPB University.</p>
+          </div>
+        </div>
+        <div class="social-media">
+          <a href="https://www.facebook.com/ryuugoooguro/" target="_blank"><i class="fa fa-facebook"></i></a>
+          <a href="https://www.linkedin.com/in/badiwidya/" target="_blank"><i class="fa fa-linkedin"></i></a>
+          <a href="http://instagram.com/badiwidya813" target="_blank"><i class="fa fa-instagram"></i></a>            <a href="https://github.com/badiwidya" target="_blank"><i class="fa fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+    <div id="music-player">
+      <div class="track-info">
+          <img src="image/ohasmara.jpeg" alt="Album Art">
+          <div class="track-details">
+              <h4>Oh! Asmara</h4>
+              <p>Kobo Kanaeru</p>
+              <div class="time">
+                  <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+              </div>
+              <div class="progress-bar">
+                  <div class="progress" id="progress"></div>
+              </div>
+          </div>
+      </div>
+      <div class="controls">
+          <button id="play-pause-btn">▶️</button>
+          <audio id="audio" autoplay>
+              <source src="music/ohasmara.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+          </audio>
+      </div>
+  </div>
+
+  <script>
+      const audio = document.getElementById('audio');
+      const playPauseBtn = document.getElementById('play-pause-btn');
+      const progress = document.getElementById('progress');
+      const currentTimeEl = document.getElementById('current-time');
+      const durationEl = document.getElementById('duration');
+
+      playPauseBtn.addEventListener('click', () => {
+          if (audio.paused) {
+              audio.play();
+              playPauseBtn.textContent = '⏸️';
+          } else {
+              audio.pause();
+              playPauseBtn.textContent = '▶️';
+          }
+      });
+
+      audio.addEventListener('timeupdate', () => {
+          const currentTime = audio.currentTime;
+          const duration = audio.duration;
+
+          const progressPercent = (currentTime / duration) * 100;
+          progress.style.width = progressPercent + '%';
+
+          currentTimeEl.textContent = formatTime(currentTime);
+          durationEl.textContent = formatTime(duration);
+      });
+
+      function formatTime(time) {
+          const minutes = Math.floor(time / 60);
+          const seconds = Math.floor(time % 60);
+          return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+          durationEl.textContent = formatTime(audio.duration);
+      });
+  </script>
+  </div>
+  </body>
+</html>
