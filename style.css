@@ -319,7 +319,7 @@ audio {
 @media screen and (max-width: 900px) 
 {
     .wrapper {
-        height: 180vh;
+        height: 120vh;
     }
     .container {
         flex-direction: column;
